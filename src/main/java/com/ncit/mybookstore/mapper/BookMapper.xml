@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncit.mybookstore.mapper.BookMapper">
+    <resultMap id="BaseBookMap" type="com.ncit.mybookstore.model.Book">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="author" column="author"/>
+        <result property="price" column="price"/>
+        <result property="sales" column="sales"/>
+        <result property="inventory" column="inventory"/>
+        <result property="img" column="img"/>
+    </resultMap>
+
+    <resultMap id="BookMap" type="com.ncit.mybookstore.model.Book">
+        <id property="id" column="id"/>
+        <result property="name" column="b_name"/>
+        <result property="author" column="b_author"/>
+        <result property="price" column="b_price"/>
+        <result property="sales" column="b_sales"/>
+        <result property="inventory" column="b_inventory"/>
+        <result property="img" column="b_img"/>
+    </resultMap>
+    
+    <select id="getBookById" resultMap="BookMap">
+        select * from t_book where id=#{id};
+    </select>
+
+    <select id="getAllBookByPrice" resultMap="BookMap">
+        select * from t_book
+        <where>
+            <if test="maxPrice!=null">
+                b_price  &lt; #{maxPrice}
+            </if>
+            <if test="minPrice!=null">
+                and b_price &gt;= #{minPrice}
+            </if>
+        </where>
+        limit #{page},#{pageSize};
+    </select>
+
+    <select id="getTolalByPrice" resultType="java.lang.Integer">
+        select count(*) from t_book
+        <where>
+            <if test="maxPrice!=null">
+                b_price  &lt; #{maxPrice}
+            </if>
+            <if test="minPrice!=null">
+                and b_price &gt;= #{minPrice}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncit.mybookstore.mapper.CartMapper">
+    <resultMap id="BaseCartMap" type="com.ncit.mybookstore.model.Cart">
+        <id property="id" column="id"/>
+        <result property="num" column="num"/>
+        <result property="userId" column="userId"/>
+    </resultMap>
+    
+    <resultMap id="CartMap" type="com.ncit.mybookstore.model.Cart" extends="BaseCartMap">
+        <association property="book" javaType="com.ncit.mybookstore.model.Book"
+                     columnPrefix="b_" resultMap="com.ncit.mybookstore.mapper.BookMapper.BaseBookMap"></association>
+    </resultMap>
+
+    <select id="getAllCart" resultMap="CartMap">
+        select * from t_cart c,t_book b where c.b_id=b.id and c.user_id=#{userId};
+    </select>
+
+    <delete id="deleteCartById" parameterType="com.ncit.mybookstore.model.Cart">
+        delete from t_cart where id = #{id};
+    </delete>
+
+    <delete id="deleteCartByName" parameterType="com.ncit.mybookstore.model.Cart">
+        delete t_cart from t_book,t_cart where t_cart.b_id = t_book.id and b_name = #{name};
+    </delete>
+    <delete id="deleteCart" parameterType="com.ncit.mybookstore.model.Cart">
+        delete from t_cart
+    </delete>
+
+    <insert id="addCart" parameterType="com.ncit.mybookstore.model.Cart">
+        insert into t_cart(num,b_id,user_id) values (#{num},#{book.id},#{userId});
+    </insert>
+
+    <select id="getCartByBookId" resultType="java.lang.Integer">
+        select count(*) from t_cart where b_id=#{bookId} and user_id=#{userId};
+    </select>
+
+    <update id="updateCartByBookId" parameterType="com.ncit.mybookstore.model.Cart">
+        update t_cart set num = num+1 where b_id=#{bookId} and user_id=#{userId};
+    </update>
+
+</mapper>

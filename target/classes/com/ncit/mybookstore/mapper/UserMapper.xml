@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncit.mybookstore.mapper.UserMapper">
+    <select id="getUserById" resultType="com.ncit.mybookstore.model.User">
+        select * from t_user where id=#{id};
+    </select>
+
+    <select id="loadUserByUsername" resultType="com.ncit.mybookstore.model.User">
+        select * from t_user where username=#{username};
+    </select>
+
+    <insert id="doRegister" parameterType="com.ncit.mybookstore.model.User">
+        insert into t_user(username,pass,email,phone,address) values (#{username},#{password},#{email},#{phone},#{address});
+    </insert>
+</mapper>
