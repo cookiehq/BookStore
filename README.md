@@ -1,17 +1,19 @@
 # BookStore
 SpringMVC网上书城
 
-  使用技术
+# 使用技术
+
     SpringMVC、Mybatis、Thymeleaf、MySQL
   
-  简介
+# 简介
+
       功能比较简单
       主要实现用户登录以及验证，根据价格区间搜索图书，分页功能，
       将图书添加到购物车，购物车删除图书以及清空购物车。
       
       sql文件请在目录中寻找，名为bookstore.sql
       
-  截图如下
+# 截图如下
       
 ![image](https://user-images.githubusercontent.com/54473942/180144099-ac400959-03ea-42c6-b740-bad09d31f4e6.png)
 
