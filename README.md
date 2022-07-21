@@ -3,7 +3,7 @@ SpringMVC网上书城
 
 # 使用技术
 
-    SpringMVC、Mybatis、Thymeleaf、MySQL
+    SpringMVC、Mybatis、FreeMarker、MySQL
   
 # 简介
 
